@@ -1,16 +1,71 @@
+@import url(./bootstrap.css);
+
+@font-face {
+  font-family: IRANsansDN;
+  font-style: normal;
+  font-weight: 300;
+  src: url('/fonts/IRANSansDN_Light/fonts/IRANSansDN_Light.eot');
+  src: url('/fonts/IRANSansDN_Light/fonts/IRANSansDN_Light.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/IRANSansDN_Light/fonts/IRANSansDN_Light.woff') format('woff'),
+    url('/fonts/IRANSansDN_Light/fonts/IRANSansDN_Light.otf') format('otf'),
+    url('/fonts/IRANSansDN_Light/fonts/IRANSansDN_Light.svg') format('svg'),
+    url('/fonts/IRANSansDN_Light/fonts/IRANSansDN_Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: IRANsansDN;
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/IRANSansDN/fonts/IRANSansDN.eot');
+  src: url('/fonts/IRANSansDN/fonts/IRANSansDN.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/IRANSansDN/fonts/IRANSansDN.woff') format('woff'),
+    url('/fonts/IRANSansDN/fonts/IRANSansDN.otf') format('otf'),
+    url('/fonts/IRANSansDN/fonts/IRANSansDN.svg') format('svg'),
+    url('/fonts/IRANSansDN/fonts/IRANSansDN.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: IRANsansDN;
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/IRANSansDN-Bold/fonts/IRANSansDN-Bold.eot');
+  src: url('/fonts/IRANSansDN-Bold/fonts/IRANSansDN-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/IRANSansDN-Bold/fonts/IRANSansDN-Bold.woff') format('woff'),
+    url('/fonts/IRANSansDN-Bold/fonts/IRANSansDN-Bold.otf') format('otf'),
+    url('/fonts/IRANSansDN-Bold/fonts/IRANSansDN-Bold.svg') format('svg'),
+    url('/fonts/IRANSansDN-Bold/fonts/IRANSansDN-Bold.ttf') format('truetype');
+}
+
+
+html {
+  font-size: 62.5%;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  overflow-x: hidden;
+
+}
+
+body {
+  font-size: 1.6rem;
 }
 
 a {
-  color: inherit;
   text-decoration: none;
 }
 
-* {
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+  font-family: IRANsansDN, tahoma!important;
+}
+
+a{
+  color: var(--bs-primary);
 }

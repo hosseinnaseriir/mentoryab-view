@@ -1,0 +1,117 @@
+import React from 'react';
+import TextField from "../../../components/common/TextField";
+import { svgIcons } from '../../../assets/icons/svgIcons';
+
+const JobInformation = ({
+    specialty,
+    setSpecialty,
+    personPosition,
+    setPersonPosition,
+    company,
+    setCompany,
+    workExprience,
+    setWorkExprience,
+    resume,
+    setResume,
+    setResumeFile,
+    simpleValidator
+}) => {
+    return ( 
+     <div className="col-md-4">
+    <h2 className="fs-32 fw-400 text-gray-900">اطلاعات کاری</h2>
+
+<TextField
+      name="specialty"
+      value={specialty}
+      onChange={(e) => setSpecialty(e.target.value)}
+      onBlur={() => {
+        simpleValidator.current.showMessageFor("specialty");
+      }}
+      icon={svgIcons.star}
+      endIcon={svgIcons.arrowDown}
+      component="select"
+      placeholder="تخصص"
+      validationMessage={simpleValidator.current.message(
+        "specialty",
+        specialty,
+        "required|min:2|max:255"
+      )}
+    />
+    <TextField
+      name="personPosition"
+      value={personPosition}
+      onChange={(e) => setPersonPosition(e.target.value)}
+      onBlur={() => {
+        simpleValidator.current.showMessageFor("personPosition");
+      }}
+      icon={svgIcons.personPosition}
+      component="input"
+      placeholder="موقعیت شغلی"
+      validationMessage={simpleValidator.current.message(
+        "personPosition",
+        personPosition,
+        "required|min:2|max:255"
+      )}
+    />
+
+    <TextField
+      name="company"
+      value={company}
+      onChange={(e) => setCompany(e.target.value)}
+      onBlur={() => {
+        simpleValidator.current.showMessageFor("company");
+      }}
+      icon={svgIcons.company}
+      component="input"
+      placeholder="شرکت یا محل کار"
+      validationMessage={simpleValidator.current.message(
+        "company",
+        company,
+        "required|min:2|max:255"
+      )}
+    />
+
+    <TextField
+      name="workExprience"
+      value={workExprience}
+      onChange={(e) => setWorkExprience(e.target.value)}
+      onBlur={() => {
+        simpleValidator.current.showMessageFor("workExprience");
+      }}
+      icon={svgIcons.workExprience}
+      component="input"
+      placeholder="سابقه کار"
+      validationMessage={simpleValidator.current.message(
+        "workExprience",
+        workExprience,
+        "required|min:2|max:255"
+      )}
+    />
+
+    <TextField
+      name="resume"
+      // value={resume}
+      onChange={(e) =>{ 
+        let file=''+ e.target.files[0];
+        setResumeFile({
+          resume:file
+        })
+        setResume(e.target.files[0].name)
+      }}
+      onBlur={() => {
+        simpleValidator.current.showMessageFor("resume");
+      }}
+      icon={svgIcons.file}
+      type="file"
+      component="file"
+      placeholder={resume || "آپلود رزومه (عکس یا PDF)"}
+      validationMessage={simpleValidator.current.message(
+        "resume",
+        resume,
+        "required|min:2|max:255"
+      )}
+    />
+  </div> );
+}
+ 
+export default JobInformation;

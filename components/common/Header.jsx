@@ -1,53 +1,44 @@
 import React,{ useEffect, useState } from 'react';
 import Head from "next/head";
-import axios from "axios";
-import { getCookies } from "cookies-next";
-import { BASE_API } from "../../api";
 import Link from "next/link";
-import getFetch from "../../utils/getFetch";
 import Button from "./Button";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import styled from "styled-components";
 import theme from "../../theme";
-import IconButton from '@mui/material/IconButton'
 import { svgIcons } from '../../assets/icons/svgIcons';
 import { Box } from '@mui/material';
-import { setCookies } from "cookies-next";
+import { removeCookies } from "cookies-next";
+import { useDispatch , useSelector  } from 'react-redux'
+import { fetchUserHeader } from './../../redux/slices/userSlice';
+import { getCookies } from 'cookies-next';
+import { useRouter } from "next/router";
+
 
 const Header = () => {
-  const [headerData, setHeaderData] = useState([]);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { pending , userDetails :headerData} = useSelector(state =>  state.userSlice);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+
 
   const handleLogout = () =>{
-    setCookies("token", "");
+    removeCookies("token",null);
     setAnchorEl(null);
   }
 
+  const handleProfile =() => {
+    setAnchorEl(null);
+    if(headerData.iWantBeMentor) router.push('/complete-register')
+  }
+
   useEffect(() => {
-    let url;
-    let headers = {
-      "ath-token": getCookies("token").token,
-    };
-
-    getCookies("token").token
-      ? (url = `${BASE_API}/get-user-header`)
-      : (url = `${BASE_API}/get-header`);
-
-    getFetch(true, url, headers, (res) => {
-      setHeaderData(res.data);
-    });
-  }, [anchorEl]);
-
+    dispatch(fetchUserHeader())
+  }, [getCookies("token").token]);
 
   return (
     <StyledHeader className="py-16">
@@ -59,6 +50,9 @@ const Header = () => {
             width: "155px",
             height: "55px",
           }}
+          onClick={()=>{
+            console.log('clivk')
+            dispatch(fetchUserHeader())}}
         >
           {" "}
           لوگــــو
@@ -87,10 +81,10 @@ const Header = () => {
           <>
                <Button
                id="fade-button"
-               aria-controls={open ? 'fade-menu' : undefined}
+               aria-controls={Boolean(anchorEl) ? 'fade-menu' : undefined}
                aria-haspopup="true"
-               aria-expanded={open ? 'true' : undefined}
-               onClick={handleClick}
+               aria-expanded={Boolean(anchorEl) ? 'true' : undefined}
+               onClick={(e) => setAnchorEl(e.currentTarget)}
                startIcon={<Box sx={{
                  position:'relative',
                  top:'.5rem',
@@ -105,11 +99,11 @@ const Header = () => {
                  'aria-labelledby': 'fade-button',
                }}
                anchorEl={anchorEl}
-               open={open}
-               onClose={handleClose}
+               open={Boolean(anchorEl)}
+               onClose={() =>setAnchorEl(null)}
                TransitionComponent={Fade}
              >
-               <MenuItem onClick={handleClose}>پروفایل</MenuItem>
+               <MenuItem onClick={handleProfile}>پروفایل</MenuItem>
                <MenuItem onClick={handleLogout}>خروج از حساب</MenuItem>
              </Menu>
           </>

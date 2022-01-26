@@ -1,9 +1,9 @@
 import "../styles/globals.css";
-import { store } from "./../redux";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@mui/material/styles";
+import  store from "./../redux/store/index";
 
 import { muiTheme } from "./../theme";
 import RTL from "./../theme/RTL";

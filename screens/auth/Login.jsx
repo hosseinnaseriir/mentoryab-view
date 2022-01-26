@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState ,useEffect } from "react";
 import Head from "next/head";
 import Typography from "../../components/common/Typography";
 import TextField from "./../../components/common/TextField";
@@ -8,8 +8,7 @@ import SimpleReactValidator from "simple-react-validator";
 import postFetch from "./../../utils/postFetch";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { setCookies } from "cookies-next";
-import { useEffect } from "react";
+import { getCookies ,setCookies } from "cookies-next";
 
 const loginScreen = () => {
   const router = useRouter();
@@ -32,6 +31,7 @@ const loginScreen = () => {
 
   const loginUser = (e) => {
     e.preventDefault();
+
     postFetch(
       simpleValidator.current?.allValid(),
       `http://localhost:5000/auth/login`,
@@ -42,15 +42,20 @@ const loginScreen = () => {
       null ,
       (res) => {
         if (res.status === 200) {
-          setCookies("token", res.data.token, {
+         setCookies("token", res.data.token, {
             path: "/",
-            maxAge: 60 * 60 * 24,
+            maxAge:(rememberMe) ? 60 * 60 * 24 : null,
           });
           router.push("/");
         }
       }
     );
   };
+
+
+  useEffect(()=>{
+    if((getCookies("token").token))router.push("/");
+  },[])
 
   return (
     <div className="container">

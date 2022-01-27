@@ -5,7 +5,7 @@ import theme from './../../../theme/index';
 import EditAvatar from './../../../components/common/EditAvatar/index';
 import { Typography } from '@mui/material';
 
-const AddAvatar = () => {
+const AddAvatar = ({setAvatar}) => {
 
     const [showCropper, setShowCropper] = useState(true);
     
@@ -14,7 +14,7 @@ const AddAvatar = () => {
     <Typography className="my-5 py-5 fs-44" variant="h1">
       تکمیل ثبت نام
     </Typography>
-        {showCropper && (<EditAvatar/>)}
+        {showCropper && (<EditAvatar setAvatar={setAvatar}/>)}
   </StyledAvatar> );
 }
  

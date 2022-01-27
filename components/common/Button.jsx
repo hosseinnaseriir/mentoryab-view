@@ -23,7 +23,7 @@ const Button = ({
   };
 
   switch (type) {
-    case "button":
+    case ("button" || "submit"):
       return (
         
         <StyledButton className={parentClassName}>
@@ -33,6 +33,7 @@ const Button = ({
           className={className} 
           endIcon={endIcon}
           startIcon={startIcon}
+          type={type}
           >
           {children}
           </MuiButton>
@@ -41,13 +42,15 @@ const Button = ({
       break;
     default:
       return (
-        <StyledButton>
+        
+        <StyledButton className={parentClassName}>
         <MuiButton 
           disabled={!disabled}
           onClick={type !== "link" ? onClick : handleLink}
           className={className} 
           endIcon={endIcon}
           startIcon={startIcon}
+          type={type}
           >
           {children}
           </MuiButton>

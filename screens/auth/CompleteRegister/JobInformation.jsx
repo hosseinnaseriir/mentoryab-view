@@ -92,7 +92,8 @@ const JobInformation = ({
       name="resume"
       // value={resume}
       onChange={(e) =>{ 
-        let file=''+ e.target.files[0];
+        let file=e.target.files[0];
+        console.log(file)
         setResumeFile({
           resume:file
         })

@@ -8,7 +8,7 @@ import { svgIcons } from './../../../assets/icons/svgIcons';
 import { Box } from '@mui/material';
 import theme from './../../../theme/index';
 
-const EditAvatar = ({ imgSrc }) => {
+const EditAvatar = ({ imgSrc , setAvatar }) => {
 
     const { croppedImage, setCroppedImage, setImgeSorce } = useContext(Contexts);
     //react essy crop 
@@ -38,16 +38,18 @@ const EditAvatar = ({ imgSrc }) => {
     const showCroppedImage = useCallback(async (e) => {
         e.preventDefault();
         try {
-            const croppedImage = await getCroppedImg(
+            const {url , file} = await getCroppedImg(
                 imageSrc,
                 croppedAreaPixels,
                 rotation
             );
 
             setImgeSorce(imageSrc)
-            // console.log('donee', { croppedImage })
-            setCroppedImage(croppedImage)
-            setshowCropper(!showCropper)
+            console.log('donee', { file , url })
+            setCroppedImage(url)
+            setshowCropper(!showCropper);
+            setAvatar(file)
+
         } catch (e) {
             console.error(e)
         }
@@ -67,7 +69,7 @@ const EditAvatar = ({ imgSrc }) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0]
             let imageDataUrl = await readFile(file)
-            setImageSrc(imageDataUrl)
+            setImageSrc(imageDataUrl);
         }
         setshowCropper(!showCropper)
     }

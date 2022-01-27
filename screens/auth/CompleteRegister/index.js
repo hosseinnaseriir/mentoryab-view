@@ -1,10 +1,16 @@
-import React, { useRef } from "react";
+import React, {
+  useRef
+} from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Typography from "../../../components/common/Typography";
 import TextField from "../../../components/common/TextField";
-import { useState } from "react";
-import { svgIcons } from "../../../assets/icons/svgIcons";
+import {
+  useState
+} from "react";
+import {
+  svgIcons
+} from "../../../assets/icons/svgIcons";
 import SimpleReactValidator from "simple-react-validator";
 
 import Button from '../../../components/common/Button';
@@ -12,7 +18,13 @@ import JobInformation from "./jobInformation";
 import LocationInformation from "./LocationInformation";
 import ContactInformation from "./ContactInformation";
 import AddAvatar from './AddAvatar';
-import { Box } from '@mui/material';
+import {
+  Box
+} from '@mui/material';
+import postFetch from './../../../utils/postFetch';
+import {
+  BASE_API
+} from './../../../api/index';
 
 const CompleteRegister = () => {
   const simpleValidator = useRef(
@@ -42,8 +54,41 @@ const CompleteRegister = () => {
   const [instagram, setInstagram] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [website, setWebsite] = useState();
-  
-  
+
+
+
+  const handleCompleteProfile = (e) => {
+    e.preventDefault();
+    console.log(`${BASE_API}'/complete-register`);
+
+    const formData = new FormData();
+
+    formData.append('specialty', specialty);
+    formData.append('image', avatar);
+    formData.append('personPosition', personPosition);
+    formData.append('company', company);
+    formData.append('workExprience', workExprience);
+    formData.append('province', province);
+    formData.append('city', city);
+    formData.append('address', address);
+    formData.append('birthDay', birthDay);
+    formData.append('linkedin', linkedin);
+    formData.append('instagram', instagram);
+    formData.append('phoneNumber', phoneNumber);
+    formData.append('website', website);
+ 
+    for (var pair of formData.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]); 
+    }
+    postFetch(true, `${BASE_API}/auth/complete-register`, formData, {
+      "Content-Type": "multipart/form-data"
+    }).then(res => {
+      console.log(res)
+    })
+  }
+
+ 
+
   return (
     <>
       <Head>
@@ -52,7 +97,7 @@ const CompleteRegister = () => {
       </Head>
       <main className="container">
         <form>
-         <AddAvatar/>
+         <AddAvatar setAvatar={setAvatar}/>
           <Box className="row mt-md-5 pt-md-5 mb-5">
            <JobInformation
               specialty={specialty}
@@ -90,7 +135,7 @@ const CompleteRegister = () => {
               website={website}
               setWebsite={setWebsite}
           />
-            <Button parentClassName='d-flex flex-row-reverse' >ثبت و ورود</Button>
+            <Button type='submit' onClick={e=>handleCompleteProfile(e)} parentClassName='d-flex flex-row-reverse' >ثبت و ورود</Button>
           </Box>
         </form>
       </main>

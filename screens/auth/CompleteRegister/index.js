@@ -12,6 +12,7 @@ import JobInformation from "./jobInformation";
 import LocationInformation from "./LocationInformation";
 import ContactInformation from "./ContactInformation";
 import AddAvatar from './AddAvatar';
+import { Box } from '@mui/material';
 
 const CompleteRegister = () => {
   const simpleValidator = useRef(
@@ -52,7 +53,7 @@ const CompleteRegister = () => {
       <main className="container">
         <form>
          <AddAvatar/>
-          <div className="row mb-5">
+          <Box className="row mt-md-5 pt-md-5 mb-5">
            <JobInformation
               specialty={specialty}
               setSpecialty={setSpecialty}
@@ -90,7 +91,7 @@ const CompleteRegister = () => {
               setWebsite={setWebsite}
           />
             <Button parentClassName='d-flex flex-row-reverse' >ثبت و ورود</Button>
-          </div>
+          </Box>
         </form>
       </main>
     </>

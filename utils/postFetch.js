@@ -1,7 +1,7 @@
-import axios from "axios"
 import {
     toast
 } from "react-toastify";
+import axios from "axios";
 
 const postFetch = async (validator, url, data ,headers={}, callBack) => {
     try {

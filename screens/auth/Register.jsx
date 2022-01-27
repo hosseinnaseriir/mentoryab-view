@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState , useEffect} from "react";
 import Head from "next/head";
 import Typography from "../../components/common/Typography";
 import TextField from "../../components/common/TextField";
@@ -9,6 +9,7 @@ import postFetch from "./../../utils/postFetch";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { BASE_API } from "./../../api/index";
+import { getCookies  } from "cookies-next";
 
 const RegisterScreen = () => {
   const router = useRouter();
@@ -53,7 +54,9 @@ const RegisterScreen = () => {
       }
     );
   };
-
+  useEffect(()=>{
+    if((getCookies("token").token))router.push("/");
+  },[])
   return (
     <div className="container">
       <Head>

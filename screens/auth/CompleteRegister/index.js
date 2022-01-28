@@ -25,6 +25,7 @@ import postFetch from './../../../utils/postFetch';
 import {
   BASE_API
 } from './../../../api/index';
+import { Autocomplete } from '@mui/material';
 
 const CompleteRegister = () => {
   const simpleValidator = useRef(
@@ -63,8 +64,9 @@ const CompleteRegister = () => {
 
     const formData = new FormData();
 
-    formData.append('specialty', specialty);
-    formData.append('image', avatar);
+    formData.append('specialty', specialty);  
+    formData.append('avatar', avatar);
+    formData.append('resume', resumeFile.resume);
     formData.append('personPosition', personPosition);
     formData.append('company', company);
     formData.append('workExprience', workExprience);
@@ -86,7 +88,7 @@ const CompleteRegister = () => {
       console.log(res)
     })
   }
-
+  console.log('specialty', specialty)
  
 
   return (
@@ -99,6 +101,7 @@ const CompleteRegister = () => {
         <form>
          <AddAvatar setAvatar={setAvatar}/>
           <Box className="row mt-md-5 pt-md-5 mb-5">
+ 
            <JobInformation
               specialty={specialty}
               setSpecialty={setSpecialty}

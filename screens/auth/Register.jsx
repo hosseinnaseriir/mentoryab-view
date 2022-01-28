@@ -45,14 +45,14 @@ const RegisterScreen = () => {
         confirmPassword,
         iWantBeMentor,
       },
-      null,
+      null
+    ).then(
       (res) => {
         if (res.status === 201) {
           if (iWantBeMentor) return router.push("/complete-register") ;
           router.push("/login");
         }
-      }
-    );
+      })
   };
   useEffect(()=>{
     if((getCookies("token").token))router.push("/");

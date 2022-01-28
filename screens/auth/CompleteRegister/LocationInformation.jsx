@@ -31,6 +31,7 @@ const JobInformation = ({
       endIcon={svgIcons.arrowDown}
       component="select"
       placeholder="استان"
+      options={['فارس']}
       validationMessage={simpleValidator.current.message(
         "province",
         province,
@@ -40,6 +41,7 @@ const JobInformation = ({
     <TextField
       name="city"
       value={city}
+      options={['شیراز']}
       onChange={(e) => setCity(e.target.value)}
       onBlur={() => {
         simpleValidator.current.showMessageFor("city");
@@ -74,7 +76,7 @@ const JobInformation = ({
     <TextField
       name="birthDay"
       value={birthDay}
-      onChange={(e) => setBirthDay(e.target.value)}
+      
       onBlur={() => {
         simpleValidator.current.showMessageFor("birthDay");
       }}
@@ -91,15 +93,20 @@ const JobInformation = ({
     >
       <DatePicker
       id="datepicker"
-        placeholder="تاریخ تولد"
-        inputClass="h-100 w-100 border-0 fs-16"
-        containerStyle={{
-          display: 'flex',
-          width: '100%',
-          height:'100%',
-          fontSize:'1.6rem',
-          marginRight:'2rem'
+      onChange={(value) =>{
+        console.log(value);
+        console.log(`${value.year}/${value.month.number}/${value.day}`);
+         setBirthDay(`${value.year}/${value.month.number}/${value.day}`)
         }}
+          placeholder="تاریخ تولد"
+          inputClass="h-100 w-100 border-0 fs-16"
+          containerStyle={{
+            display: 'flex',
+            width: '100%',
+            height:'100%',
+            fontSize:'1.6rem',
+            marginRight:'2rem'
+          }}
         calendar={shamsiCalendar}
         locale={farsiCalendar}
       />

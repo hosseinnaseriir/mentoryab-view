@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from "../../../components/common/TextField";
 import { svgIcons } from '../../../assets/icons/svgIcons';
 
+
 const JobInformation = ({
     specialty,
     setSpecialty,
@@ -16,11 +17,15 @@ const JobInformation = ({
     setResumeFile,
     simpleValidator
 }) => {
+
+
+
     return ( 
      <div className="col-md-4">
+
     <h2 className="fs-32 fw-400 text-gray-900">اطلاعات کاری</h2>
 
-<TextField
+    <TextField
       name="specialty"
       value={specialty}
       onChange={(e) => setSpecialty(e.target.value)}

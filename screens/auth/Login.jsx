@@ -40,7 +40,8 @@ const loginScreen = () => {
         password,
       },
       null ,
-      (res) => {
+     
+    ).then( (res) => {
         if (res.status === 200) {
          setCookies("token", res.data.token, {
             path: "/",
@@ -48,8 +49,7 @@ const loginScreen = () => {
           });
           router.push("/");
         }
-      }
-    );
+      })
   };
 
 

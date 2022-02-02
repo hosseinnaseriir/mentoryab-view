@@ -9,9 +9,11 @@ import postFetch from "./../../utils/postFetch";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getCookies ,setCookies } from "cookies-next";
+import { useSelector } from 'react-redux';
 
 const loginScreen = () => {
   const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);

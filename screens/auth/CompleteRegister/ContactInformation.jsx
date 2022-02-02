@@ -61,7 +61,7 @@ const ContactInformation = ({
       validationMessage={simpleValidator.current.message(
         "phoneNumber",
         phoneNumber,
-        "required|min:2|max:255"
+        "required|integer|min:2|max:255"
       )}
     />
     <TextField

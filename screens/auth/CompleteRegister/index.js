@@ -26,6 +26,8 @@ import {
   BASE_API
 } from './../../../api/index';
 import { Autocomplete } from '@mui/material';
+import { getCookies } from 'cookies-next';
+import { useSelector } from 'react-redux';
 
 const CompleteRegister = () => {
   const simpleValidator = useRef(
@@ -44,7 +46,7 @@ const CompleteRegister = () => {
   const [specialty, setSpecialty] = useState();
   const [personPosition, setPersonPosition] = useState();
   const [company, setCompany] = useState();
-  const [workExprience, setWorkExprience] = useState();
+  const [workExperience, setWorkExperience] = useState();
   const [resume, setResume] = useState();
   const [resumeFile, setResumeFile] = useState();
   const [province, setProvince] = useState();
@@ -56,7 +58,9 @@ const CompleteRegister = () => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [website, setWebsite] = useState();
 
+  const { userDetails} = useSelector(state =>  state.userSlice);
 
+  console.log(userDetails)
 
   const handleCompleteProfile = (e) => {
     e.preventDefault();
@@ -64,12 +68,13 @@ const CompleteRegister = () => {
 
     const formData = new FormData();
 
+    formData.append('userID', userDetails.userID);  
     formData.append('specialty', specialty);  
     formData.append('avatar', avatar);
-    formData.append('resume', resumeFile.resume);
+    formData.append('resume', resumeFile?.resume);
     formData.append('personPosition', personPosition);
     formData.append('company', company);
-    formData.append('workExprience', workExprience);
+    formData.append('workExperience', workExperience);
     formData.append('province', province);
     formData.append('city', city);
     formData.append('address', address);
@@ -82,7 +87,9 @@ const CompleteRegister = () => {
     for (var pair of formData.entries()) {
         console.log(pair[0]+ ', ' + pair[1]); 
     }
+    
     postFetch(true, `${BASE_API}/auth/complete-register`, formData, {
+      "ath-token": getCookies("token").token,
       "Content-Type": "multipart/form-data"
     }).then(res => {
       console.log(res)
@@ -109,8 +116,8 @@ const CompleteRegister = () => {
               setPersonPosition={setPersonPosition}
               company={company}
               setCompany={setCompany}
-              workExprience={workExprience}
-              setWorkExprience={setWorkExprience}
+              workExperience={workExperience}
+              setWorkExperience={setWorkExperience}
               resume={resume}
               setResume={setResume}
               setResumeFile={setResumeFile}
@@ -138,6 +145,7 @@ const CompleteRegister = () => {
               website={website}
               setWebsite={setWebsite}
           />
+            {/* <Button variant='secondary' type='submit' onClick={e=>handleCompleteProfile(e)} parentClassName='d-flex flex-row-reverse' >باشه برای بعد</Button> */}
             <Button type='submit' onClick={e=>handleCompleteProfile(e)} parentClassName='d-flex flex-row-reverse' >ثبت و ورود</Button>
           </Box>
         </form>

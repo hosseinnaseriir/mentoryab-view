@@ -33,6 +33,7 @@ const Header = () => {
 
   const handleProfile =() => {
     setAnchorEl(null);
+    console.log(headerData.iWantBeMentor)
     if(headerData.iWantBeMentor) router.push('/complete-register')
   }
 

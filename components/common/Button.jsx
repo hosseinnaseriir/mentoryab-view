@@ -14,7 +14,8 @@ const Button = ({
   children,
   endIcon,
   startIcon,
-  parentClassName
+  parentClassName,
+  variant
 }) => {
   const router = useRouter();
   const handleLink = (e) => {
@@ -34,6 +35,7 @@ const Button = ({
           endIcon={endIcon}
           startIcon={startIcon}
           type={type}
+          variant={variant}
           >
           {children}
           </MuiButton>

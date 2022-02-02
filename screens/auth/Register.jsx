@@ -49,7 +49,6 @@ const RegisterScreen = () => {
     ).then(
       (res) => {
         if (res.status === 201) {
-          if (iWantBeMentor) return router.push("/complete-register") ;
           router.push("/login");
         }
       })

@@ -10,15 +10,13 @@ const JobInformation = ({
     setPersonPosition,
     company,
     setCompany,
-    workExprience,
-    setWorkExprience,
+    workExperience,
+    setWorkExperience,
     resume,
     setResume,
     setResumeFile,
     simpleValidator
 }) => {
-
-
 
     return ( 
      <div className="col-md-4">
@@ -75,21 +73,21 @@ const JobInformation = ({
         "required|min:2|max:255"
       )}
     />
-
+    
     <TextField
-      name="workExprience"
-      value={workExprience}
-      onChange={(e) => setWorkExprience(e.target.value)}
+      name="workExperience"
+      value={workExperience}
+      onChange={(e) => setWorkExperience(e.target.value)}
       onBlur={() => {
-        simpleValidator.current.showMessageFor("workExprience");
+        simpleValidator.current.showMessageFor("workExperience");
       }}
       icon={svgIcons.workExprience}
       component="input"
       placeholder="سابقه کار"
       validationMessage={simpleValidator.current.message(
-        "workExprience",
-        workExprience,
-        "required|min:2|max:255"
+        "workExperience",
+        workExperience,
+        "required|integer|min:0|max:100"
       )}
     />
 

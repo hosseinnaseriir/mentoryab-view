@@ -33,6 +33,7 @@ export default theme;
 export const muiTheme = createTheme({
     direction: 'rtl',
     typography: {
-        fontSize: '1rem',
+        // fontSize: '1rem',
+        htmlFontSize: 10,
     },
 });

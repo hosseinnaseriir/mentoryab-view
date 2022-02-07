@@ -81,6 +81,7 @@ const Header = () => {
         {headerData?.fullName ? (
           <>
                <Button
+               variant='contained'
                id="fade-button"
                aria-controls={Boolean(anchorEl) ? 'fade-menu' : undefined}
                aria-haspopup="true"
@@ -110,7 +111,9 @@ const Header = () => {
           </>
         ) : (
           <Link href="/login">
-            <Button>حساب کاربری</Button>
+            <Button 
+               variant='contained'
+            >حساب کاربری</Button>
           </Link>
         )}
       </nav>

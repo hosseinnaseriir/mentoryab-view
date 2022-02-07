@@ -23,6 +23,7 @@ const HomeScreen = () => {
 
       <main className="d-flex justify-content-center mb-5 pb-5">
             <Header/>
+            <h1>slider</h1>
       </main>
     </div>
   );

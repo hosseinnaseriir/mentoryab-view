@@ -172,6 +172,7 @@ const RegisterScreen = () => {
                 disabled={readRules}
                 className="mt-3"
                 onClick={registerUser}
+                variant='contained'
               >
                 مرحله بعد
               </Button>
@@ -180,6 +181,7 @@ const RegisterScreen = () => {
                 disabled={readRules}
                 onClick={registerUser}
                 className="mt-3"
+                variant='contained'
               >
                 ثبت نام
               </Button>

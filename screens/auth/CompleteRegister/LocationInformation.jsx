@@ -20,6 +20,7 @@ const JobInformation = ({
 }) => {
     return ( <div className="col-md-4">
     <h2 className="fs-32 fw-400 text-gray-900">اطلاعات مکانی</h2>
+    
     <TextField
       name="province"
       value={province}
@@ -93,6 +94,7 @@ const JobInformation = ({
     >
       <DatePicker
       id="datepicker"
+      value={birthDay}
       onChange={(value) =>{
         console.log(value);
         console.log(`${value.year}/${value.month.number}/${value.day}`);

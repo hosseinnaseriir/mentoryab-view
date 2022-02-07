@@ -125,6 +125,7 @@ const loginScreen = () => {
 
             <Button
               onClick={loginUser}
+              variant='contained'
               className="mt-3"
               disabled={simpleValidator.current?.allValid()}
             >

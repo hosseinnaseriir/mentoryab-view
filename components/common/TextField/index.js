@@ -7,10 +7,9 @@ import { Autocomplete, Box, InputLabel, OutlinedInput, Stack } from "@mui/materi
 import { StyledSelect } from './StyledSelect';
 import { StyledCheckBox } from './StyledCheckBox';
 import { StyledLabel } from './StyledLabel';
-import TextField from './index';
 
 
-const TextFieldd = ({
+const TextField = ({
   component = "input",
   children,
   className,
@@ -150,7 +149,7 @@ const TextFieldd = ({
             }}
             id={id}
           >
-            {!showSelectLabel && placeholder}
+            {!showSelectLabel && !value && placeholder}
           </InputLabel>
           <StyledSelect
             IconComponent={() => {
@@ -297,4 +296,4 @@ const StyledFormControl = styled.div`
 
 
 
-export default TextFieldd;
+export default TextField;

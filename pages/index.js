@@ -20,7 +20,7 @@ const Home = () => {
 
       <main className={styles.main} style={{minHeight:'100vh'}}>
           <Header/>
-
+         
       </main>
 
     </div>

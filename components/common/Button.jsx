@@ -53,6 +53,7 @@ const Button = ({
           endIcon={endIcon}
           startIcon={startIcon}
           type={type}
+          variant={variant}
           >
           {children}
           </MuiButton>
@@ -64,9 +65,21 @@ const Button = ({
 
 
 const StyledButton = styled.div`
-.MuiButton-root{
+.MuiButton-contained{
   background-color: ${theme.colors.brand};
   color: ${theme.colors.white};
+  border-radius: ${theme.rounded[2]};
+  font-weight: bold;
+  padding: ${theme.spacing[2]} ${theme.spacing[6]};
+  max-height:5.2rem;
+  outline: none;
+  border: 0.2rem solid ${theme.colors.brand};
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.MuiButton-outlined {
   border-radius: ${theme.rounded[2]};
   font-weight: bold;
   padding: ${theme.spacing[2]} ${theme.spacing[6]};

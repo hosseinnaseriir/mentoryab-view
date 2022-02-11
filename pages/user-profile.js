@@ -1,9 +1,9 @@
 import React from 'react';
-import LoginScreen from './../screens/auth/Login';
+import UserProfileScreen from '../screens/auth/UserProfileScreen/index';
 
 const Login = () => {
   return ( <>
-  <LoginScreen />
+  <UserProfileScreen />
   </>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect ,useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Head from "next/head";
 import SimpleReactValidator from "simple-react-validator";
 import { Box } from "@mui/material";
@@ -16,6 +16,7 @@ import { BASE_API } from "./../../../api/index";
 import postFetch from "./../../../utils/postFetch";
 import getFetch from "./../../../utils/getFetch";
 import putFetch from "./../../../utils/putFetch";
+import SpecialityInformation from "./SpecialityInformation";
 
 const CompleteRegister = () => {
   const router = useRouter();
@@ -31,12 +32,14 @@ const CompleteRegister = () => {
   const [editProfile, setEditProfile] = useState(false);
   const [avatar, setAvatar] = useState();
   const [specialty, setSpecialty] = useState();
+  const [tool, setTool] = useState();
   const [personPosition, setPersonPosition] = useState();
   const [company, setCompany] = useState();
   const [workExperience, setWorkExperience] = useState();
   const [resume, setResume] = useState();
   const [resumeFile, setResumeFile] = useState();
   const [province, setProvince] = useState();
+  const [provinceID, setProvinceID] = useState();
   const [city, setCity] = useState();
   const [address, setAddress] = useState();
   const [birthDay, setBirthDay] = useState();
@@ -51,6 +54,7 @@ const CompleteRegister = () => {
     const formData = new FormData();
     formData.append("userID", userDetails.userID || "");
     formData.append("specialty", specialty || "");
+    formData.append("tool", tool || "");
     formData.append("avatar", avatar || "");
     formData.append("resume", resumeFile?.resume || resume || "");
     formData.append("personPosition", personPosition || "");
@@ -103,6 +107,7 @@ const CompleteRegister = () => {
       setEditProfile(true);
       let data = res.data;
       setSpecialty(data.specialty);
+      setTool(data.tool);
       setPersonPosition(data.personPosition);
       setWorkExperience(data.workExperience);
       setCompany(data.company);
@@ -124,7 +129,6 @@ const CompleteRegister = () => {
     handleGetProfileData();
   }, []);
 
-
   return (
     <>
       <Head>
@@ -132,11 +136,10 @@ const CompleteRegister = () => {
         <meta name="description" content="صفحه ثبت نام در منتور یاب" />
       </Head>
       <main className="container">
-  
         <form>
           <AddAvatar avatar={avatar} setAvatar={setAvatar} />
           <Box className="row mt-md-5 pt-md-5 mb-5">
-            <JobInformation
+            {/* <JobInformation
               specialty={specialty}
               setSpecialty={setSpecialty}
               personPosition={personPosition}
@@ -149,10 +152,28 @@ const CompleteRegister = () => {
               setResume={setResume}
               setResumeFile={setResumeFile}
               simpleValidator={simpleValidator}
+            /> */}
+            <SpecialityInformation
+              specialty={specialty}
+              setSpecialty={setSpecialty}
+              personPosition={personPosition}
+              setPersonPosition={setPersonPosition}
+              company={company}
+              setCompany={setCompany}
+              workExperience={workExperience}
+              setWorkExperience={setWorkExperience}
+              resume={resume}
+              setResume={setResume}
+              setResumeFile={setResumeFile}
+              simpleValidator={simpleValidator}
+              tool={tool}
+              setTool={setTool}
             />
             <LocationInformation
               province={province}
               setProvince={setProvince}
+              provinceID={provinceID}
+              setProvinceID={setProvinceID}
               simpleValidator={simpleValidator}
               city={city}
               setCity={setCity}
@@ -177,7 +198,7 @@ const CompleteRegister = () => {
               {editProfile ? (
                 <Button
                   type="submit"
-                  variant='contained'
+                  variant="contained"
                   onClick={(e) => handleCompleteProfile(e)}
                   parentClassName="d-flex flex-row-reverse"
                 >
@@ -186,22 +207,21 @@ const CompleteRegister = () => {
               ) : (
                 <Button
                   type="submit"
-                  variant='contained'
+                  variant="contained"
                   onClick={(e) => handleCompleteProfile(e)}
                   parentClassName="d-flex flex-row-reverse"
                 >
-                تکمیل پروفایل
+                  تکمیل پروفایل
                 </Button>
-   
               )}
               <Button
-                  type='link'
-                  href='/'
-                  variant='outlined'
-                  parentClassName="d-flex flex-row-reverse"
-                >
+                type="link"
+                href="/"
+                variant="outlined"
+                parentClassName="d-flex flex-row-reverse"
+              >
                 انصراف
-                </Button>
+              </Button>
             </Box>
           </Box>
         </form>

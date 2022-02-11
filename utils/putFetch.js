@@ -18,7 +18,10 @@ const putFetch =  (validator, url, data ,headers={}) => {
         } catch (ex) {
             console.log(ex)
             let errors = ex?.response?.data?.errors || ex || [];
-            errors.length && errors.map(error => toast.error(error));
+            console.log(errors)
+            console.log(ex?.response?.data)
+            console.log(ex?.response?.data?.errors)
+            errors.length && errors?.map(error => toast.error(error));
             reject(ex);
         }
     })

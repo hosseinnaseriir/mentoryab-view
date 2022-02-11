@@ -192,7 +192,7 @@ const TextField = ({
             <MenuItem disabled selected>
               {placeholder}
             </MenuItem>
-            {["ali", "test", "22"].map((name) => (
+            {options.map((name) => (
               <MenuItem key={name} value={name}>
                 {name}
               </MenuItem>

@@ -1,8 +1,14 @@
-import React from "react";
-import TextField from "../../../components/common/TextField/index";
+import React, { useEffect } from "react";
+import TextField from "../../../components/common/TextField";
 import { svgIcons } from "../../../assets/icons/svgIcons";
+import DatePicker from "react-multi-date-picker";
+import shamsiCalendar from "react-date-object/calendars/persian";
+import farsiCalendar from "react-date-object/locales/persian_fa";
+import programming from "./../../../utils/json/skills/programming.json";
 
-const JobInformation = ({
+const SpecialityInformation = ({
+  tool,
+  setTool,
   specialty,
   setSpecialty,
   personPosition,
@@ -19,10 +25,14 @@ const JobInformation = ({
   return (
     <div className="col-md-4">
       <h2 className="fs-32 fw-400 text-gray-900">اطلاعات کاری</h2>
+
       <TextField
         name="specialty"
         value={specialty}
-        onChange={(e) => setSpecialty(e.target.value)}
+        onChange={(e) => {
+          setSpecialty(e.target.value);
+          setTool();
+        }}
         onBlur={() => {
           simpleValidator.current.showMessageFor("specialty");
         }}
@@ -30,31 +40,55 @@ const JobInformation = ({
         endIcon={svgIcons.arrowDown}
         component="select"
         placeholder="تخصص"
-        options={['برنامه نویس' , 'طراح', 'کسب و کار']}
+        options={["برنامه نویس", "طراح", "کسب و کار"]}
         validationMessage={simpleValidator.current.message(
           "specialty",
           specialty,
           "required|min:2|max:255"
         )}
       />
-        <TextField
-        name="specialty"
-        value={specialty}
-        onChange={(e) => setSpecialty(e.target.value)}
+
+      <TextField
+        name="tool"
+        value={tool}
+        onChange={(e) => setTool(e.target.value)}
         onBlur={() => {
-          simpleValidator.current.showMessageFor("specialty");
+          simpleValidator.current.showMessageFor("tool");
         }}
-        icon={svgIcons.star}
+        icon={
+          specialty === "طراح"
+            ? svgIcons.design
+            : specialty === "برنامه نویس"
+            ? svgIcons.code
+            : svgIcons.business
+        }
         endIcon={svgIcons.arrowDown}
         component="select"
-        placeholder="زبان برنامه نویسی"
-        options={['برنامه نویس' , 'طراح', 'کسب و کار']}
+        placeholder={
+          specialty === "طراح"
+            ? "شاخه کاری"
+            : specialty === "برنامه نویس"
+            ? "زبان برنامه نویسی"
+            : specialty === "کسب و کار"
+            ? "شاخه فعالیت"
+            : "جزییات"
+        }
+        options={
+          specialty === "طراح"
+            ? ["برنامه نویس", "طراح", "کسب و کار"]
+            : specialty === "برنامه نویس"
+            ? programming.map((item) => item.name)
+            : specialty === "کسب و کار"
+            ? [1, 2, 3]
+            : []
+        }
         validationMessage={simpleValidator.current.message(
-          "specialty",
-          specialty,
+          "tool",
+          tool,
           "required|min:2|max:255"
         )}
       />
+
       <TextField
         name="personPosition"
         value={personPosition}
@@ -135,4 +169,4 @@ const JobInformation = ({
   );
 };
 
-export default JobInformation;
+export default SpecialityInformation;

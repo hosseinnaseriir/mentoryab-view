@@ -32,6 +32,18 @@ export default theme;
 
 export const muiTheme = createTheme({
     direction: 'rtl',
+    palette:{
+        primary:{
+            main: '#004CBF',
+        },
+        secondary:{
+        main:'#65FFB5',
+        },
+        common:{
+            black:'#000',
+            white:'#fafafa'
+        }
+    },
     typography: {
         // fontSize: '1rem',
         htmlFontSize: 10,

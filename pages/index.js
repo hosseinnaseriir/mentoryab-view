@@ -6,8 +6,9 @@ import axios from 'axios';
 import { BASE_API } from './../api/index';
 import { getCookies } from 'cookies-next';
 import Header from '../components/common/Header';
+import HomeScreen from './../screens/home/index';
 
-const Home = () => {
+const HomeIndex = () => {
 
 
 
@@ -19,7 +20,7 @@ const Home = () => {
       </Head>
 
       <main className={styles.main} style={{minHeight:'100vh'}}>
-          <Header/>
+          <HomeScreen/>
          
       </main>
 
@@ -27,4 +28,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomeIndex

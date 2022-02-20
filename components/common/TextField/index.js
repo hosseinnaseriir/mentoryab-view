@@ -3,11 +3,16 @@ import styled from "styled-components";
 import { svgIcons } from "../../../assets/icons/svgIcons";
 import MenuItem from "@mui/material/MenuItem";
 import theme from "../../../theme/index";
-import { Autocomplete, Box, InputLabel, OutlinedInput, Stack } from "@mui/material";
-import { StyledSelect } from './StyledSelect';
-import { StyledCheckBox } from './StyledCheckBox';
-import { StyledLabel } from './StyledLabel';
-
+import {
+  Autocomplete,
+  Box,
+  InputLabel,
+  OutlinedInput,
+  Stack,
+} from "@mui/material";
+import { StyledSelect } from "./StyledSelect";
+import { StyledCheckBox } from "./StyledCheckBox";
+import { StyledLabel } from "./StyledLabel";
 
 const TextField = ({
   component = "input",
@@ -26,12 +31,10 @@ const TextField = ({
   name = "sd",
   onBlur = () => {},
   validationMessage = "",
-  options=[],
-  styles={},
+  options = [],
+  styles = {},
   inputId,
- 
 }) => {
-
   // create ID for input and label
   let id = inputId || ("" + (placeholder || label) + type).replace(/\s/g, "");
 
@@ -70,28 +73,27 @@ const TextField = ({
     case "file":
       return (
         <StyledFormControl className="position-relative">
-               <InputLabel
-                sx={{
-                  position: "absolute",
-                  top: "50%",
-                  transform: 'translateY(-50%)',
-                  right: "6.8rem",
-                  pointerEvents:'none'
-                }}
-      
+          <InputLabel
+            sx={{
+              position: "absolute",
+              top: "50%",
+              transform: "translateY(-50%)",
+              right: "6.8rem",
+              pointerEvents: "none",
+            }}
           >
             {!showSelectLabel && placeholder}
           </InputLabel>
-       
+
           <StyledLabel
             className={
               className + " " + (validationMessage ? "input-danger" : "")
             }
             htmlFor={id}
-          > 
+          >
             {icon && <span>{icon}</span>}
             <input
-            hidden={true}
+              hidden={true}
               name={name}
               autoComplete={autoComplete}
               placeholder={placeholder}
@@ -136,22 +138,31 @@ const TextField = ({
         </StyledFormControl>
       );
       break;
-      
+
     case "select":
       return (
         <Box position="relative">
           <InputLabel
+            style={{
+              right: icon ? "6.8rem" : "2.4rem",
+            }}
             sx={{
               position: "absolute",
               top: "50%",
-              right: "6.8rem",
- 
+              zIndex: 20,
+              pointerEvents:'none'
             }}
             id={id}
           >
-            {!showSelectLabel && !value && placeholder}
+            {(!showSelectLabel && !value && placeholder) || (!showSelectLabel && value)}
           </InputLabel>
           <StyledSelect
+            sx={{
+              ...styles,
+              "& .MuiInputBase-input": {
+                paddingRight: !icon && `2.4rem!important`,
+              },
+            }}
             IconComponent={() => {
               if (endIcon)
                 return (
@@ -202,57 +213,7 @@ const TextField = ({
       );
       break;
 
-    case "autoComplete" : 
-    return(
-      <StyledFormControl>
-          <StyledLabel  className={className + " " + (validationMessage ? "input-danger" : "")}
-            htmlFor={id}>
-                 {icon && <span>{icon}</span>}
-                  <Autocomplete
-                    sx={{
-                      display: 'block',
-                      width: '100%',
-                      height:'100%',
-                      '& div':{
-                        height:'100%'
-                      },
-                      '& input': {
-                      paddingRight:'1.9rem',
-                      fontSize:theme.typography.h6,
-                      width: '100%',
-                      height:'100%',
-                      outline:'none',
-                      border:'none'
-                      },
-                    }}
-                    id={id}
-                    options={options}
-                    onChange={e => e.target.value}
-                    renderInput={(params) => (
-                      <div ref={params.InputProps.ref}>
-                          <input
-                            onBlur={onBlur}
-                            type={type}
-                            value={value}
-                            autoComplete='off'
-                            name={name}
-                            autoComplete={autoComplete}
-                            placeholder={placeholder}
-                            type="text"
-                            {...params.inputProps} />
-                      </div>
-                    )}
-                  />
-                  {endIcon && <span>{endIcon}</span>}
-                  {/* {validationMessage} */}
-                </StyledLabel>
-                
-      </StyledFormControl>
-                
-                )
-      break;
-
-    default:
+    case "autoComplete":
       return (
         <StyledFormControl>
           <StyledLabel
@@ -262,7 +223,63 @@ const TextField = ({
             htmlFor={id}
           >
             {icon && <span>{icon}</span>}
-            {children ? children :(
+            <Autocomplete
+              sx={{
+                display: "block",
+                width: "100%",
+                height: "100%",
+                "& div": {
+                  height: "100%",
+                },
+                "& input": {
+                  paddingRight: "1.9rem",
+                  fontSize: theme.typography.h6,
+                  width: "100%",
+                  height: "100%",
+                  outline: "none",
+                  border: "none",
+                },
+              }}
+              id={id}
+              options={options}
+              onChange={(e) => e.target.value}
+              renderInput={(params) => (
+                <div ref={params.InputProps.ref}>
+                  <input
+                    onBlur={onBlur}
+                    type={type}
+                    value={value}
+                    autoComplete="off"
+                    name={name}
+                    autoComplete={autoComplete}
+                    placeholder={placeholder}
+                    type="text"
+                    {...params.inputProps}
+                  />
+                </div>
+              )}
+            />
+            {endIcon && <span>{endIcon}</span>}
+            {/* {validationMessage} */}
+          </StyledLabel>
+        </StyledFormControl>
+      );
+      break;
+
+    default:
+      return (
+        <StyledFormControl>
+          <StyledLabel
+            className={
+              className + " " + (validationMessage ? "input-danger" : "")
+            }
+            style={{...styles}}
+            htmlFor={id}
+          >
+            {icon && <span>{icon}</span>}
+            {children ? (
+              children
+            ) : (
               <input
                 name={name}
                 autoComplete={autoComplete}
@@ -293,7 +310,5 @@ const StyledFormControl = styled.div`
     }
   }
 `;
-
-
 
 export default TextField;

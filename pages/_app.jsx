@@ -17,12 +17,12 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider theme={muiTheme}>
       <RTL>
         <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        {/* <PersistGate loading={false} persistor={persistor}> */}
           <ContextsProvider>
             <ToastContainer />
             <Component {...pageProps} />
           </ContextsProvider>
-          </PersistGate>
+          {/* </PersistGate> */}
         </Provider>
       </RTL>
     </ThemeProvider>

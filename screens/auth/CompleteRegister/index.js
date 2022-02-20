@@ -11,7 +11,6 @@ import AddAvatar from "./AddAvatar";
 import { getCookies } from "cookies-next";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 import { BASE_API } from "./../../../api/index";
 import postFetch from "./../../../utils/postFetch";
 import getFetch from "./../../../utils/getFetch";
@@ -77,7 +76,6 @@ const CompleteRegister = () => {
       })
         .then((res) => {
           router.push("/");
-          toast.success(res?.data?.message);
         })
         .catch((err) => {
           console.log(err);
@@ -91,7 +89,6 @@ const CompleteRegister = () => {
     })
       .then((res) => {
         router.push("/");
-        toast.success(res?.data?.message);
       })
       .catch((err) => {
         console.log(err);

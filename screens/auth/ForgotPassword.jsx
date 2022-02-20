@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import { getCookies, setCookies } from "cookies-next";
 import { useSelector } from "react-redux";
 
-const loginScreen = () => {
+const ForgotPasswordScreen = () => {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -31,23 +31,18 @@ const loginScreen = () => {
     })
   );
 
-  const loginUser = (e) => {
+  const handleForgotPassword = (e) => {
     e.preventDefault();
 
     postFetch(
       simpleValidator.current?.allValid(),
-      `http://localhost:5000/auth/login`,
+      `http://localhost:5000/auth/forgot-password`,
       {
         email,
-        password,
       },
       null
     ).then((res) => {
       if (res.status === 200) {
-        setCookies("token", res.data.token, {
-          path: "/",
-          maxAge: rememberMe ? 60 * 60 * 24 : null,
-        });
         router.push("/");
       }
     });
@@ -67,7 +62,7 @@ const loginScreen = () => {
       <main className="d-flex justify-content-center mb-5 pb-5">
         <form className="col-md-5 py-5">
           <Typography className="my-5 py-5" component="h1">
-            ورود به حساب
+            فراموشی رمز عبور
           </Typography>
 
           <TextField
@@ -88,33 +83,6 @@ const loginScreen = () => {
             )}
           />
 
-          <TextField
-            icon={svgIcons.luck}
-            type="password"
-            component="input"
-            placeholder="رمز عبور "
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            onBlur={() => {
-              simpleValidator.current.showMessageFor("password");
-            }}
-            validationMessage={simpleValidator.current.message(
-              "password",
-              password,
-              "required|min:4|max:255"
-            )}
-          />
-
-          <TextField
-            type="checkbox"
-            component="checkbox"
-            label="مرا به خاطر بسپار ."
-            onChange={(e) => setRememberMe(e.target.checked)}
-          />
-
-          <Link href={"/forgot-password"}>فراموشی رمز عبور</Link>
-
           <div className="d-flex justify-content-between align-items-end">
             <Link href={"/register"}>
               <a className="text-primary pb-1 d-flex align-items-center gap-1">
@@ -124,12 +92,12 @@ const loginScreen = () => {
             </Link>
 
             <Button
-              onClick={loginUser}
+              onClick={(e) => handleForgotPassword(e)}
               variant="contained"
               className="mt-3"
               disabled={simpleValidator.current?.allValid()}
             >
-              ورود
+              ارسال ایمیل بازیابی
             </Button>
           </div>
         </form>
@@ -138,4 +106,4 @@ const loginScreen = () => {
   );
 };
 
-export default loginScreen;
+export default ForgotPasswordScreen;
